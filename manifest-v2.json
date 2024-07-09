@@ -5,13 +5,12 @@
   "author": "Navendu Pottekkat & Ryan Whitehouse",
   "homepage_url": "https://nsfw-filter.com",
   "permissions": [
+    "<all_urls>",
     "storage"
   ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
   "background": {
-    "service_worker": "src/background.js"
+    "scripts": ["src/background.js"],
+    "persistent": true
   },
   "content_scripts": [
     {
@@ -24,7 +23,7 @@
       "run_at": "document_start"
     }
   ],
-  "action": {
+  "browser_action": {
     "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",
@@ -41,13 +40,8 @@
     "128": "images/icon128.png"
   },
   "web_accessible_resources": [
-    {
-      "resources": ["models/*", "images/*"],
-      "matches": ["<all_urls>"]
-    }
+    "models/*, images/*"
   ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
-  },
-  "manifest_version": 3
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
 }
